@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NewSiteDlg</class>
+ <widget class="QDialog" name="NewSiteDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>401</width>
+    <height>413</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>20</y>
+     <width>351</width>
+     <height>371</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="12" column="1">
+     <widget class="QPlainTextEdit" name="ptxtedtSiteDes">
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="plainText">
+       <string>A short description just to remember what this is.</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0">
+     <widget class="QLabel" name="lblSiteLang">
+      <property name="text">
+       <string>Site Language</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="0">
+     <widget class="QLabel" name="lblSitePin">
+      <property name="text">
+       <string>Site PIN</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="lblSiteIp">
+      <property name="text">
+       <string>Site IP address</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="lneditSiteName">
+      <property name="text">
+       <string>DemoSite</string>
+      </property>
+      <property name="maxLength">
+       <number>64</number>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="lblSiteName">
+      <property name="text">
+       <string>Site name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="lnedtSiteIp">
+      <property name="text">
+       <string>192.168.1.45</string>
+      </property>
+      <property name="maxLength">
+       <number>15</number>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QLineEdit" name="lnedtSitePin">
+      <property name="text">
+       <string>8888</string>
+      </property>
+      <property name="maxLength">
+       <number>4</number>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="1">
+     <widget class="QComboBox" name="cbxSiteLang">
+      <property name="maxCount">
+       <number>15</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>Lang0</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Lang1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Lang2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Lang3</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Lang4</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Lang5</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Lang6</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Lang7</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QDialogButtonBox" name="btnBox">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="0">
+     <widget class="QLabel" name="lblSiteDesc">
+      <property name="text">
+       <string>Site Description</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <zorder>gridLayoutWidget</zorder>
+  <zorder>ptxtedtSiteDes</zorder>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnBox</sender>
+   <signal>accepted()</signal>
+   <receiver>NewSiteDlg</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>230</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>144</x>
+     <y>228</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnBox</sender>
+   <signal>rejected()</signal>
+   <receiver>NewSiteDlg</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>230</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
