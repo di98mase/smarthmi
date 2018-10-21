@@ -28,6 +28,7 @@ void NewSiteDlg::on_btnBox_accepted()
 
     Site aSite(sName,sIp,sPin,sLang,sDesc);
 
+
   //emit sendNewSiteDetails(sName,sIp);
     emit sendNewSiteProperties(aSite);
 

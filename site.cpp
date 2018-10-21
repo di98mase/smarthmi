@@ -30,6 +30,41 @@ void Site::setAllParameters(QString sName, QString sIpAddress, QString sLang, QS
     sitePin = sPin;
     siteDescription = sDescription;
 }
+//QDataStream &operator <<(QDataStream &out,const Site &aSite)
+//{
+//   out << aSite.siteName << ","
+//       << aSite.siteIpAddress << ","
+//       << aSite.siteLang <<","
+//       << aSite.sitePin <<","
+//       << aSite.siteDescription << "\n";
+//   return out;
+//}
+
+//QDataStream &operator >>(QDataStream &in, Site &aSite)
+//{
+//autorize = uAutorizingRequest();
+//in >> autorize.UserName >> autorize.Password;
+//return in;
+//}
+
+QTextStream &operator <<(QTextStream &out,const Site &aSite)
+{
+   out << aSite.siteName << ","
+       << aSite.siteIpAddress << ","
+       << aSite.siteLang <<","
+       << aSite.sitePin <<","
+       << aSite.siteDescription << "\n";
+
+   return out;
+}
+
+QTextStream &operator >>(QTextStream &in, Site &aSite)
+{
+//autorize = uAutorizingRequest();
+//in >> autorize.UserName >> autorize.Password;
+//return in;
+}
+
 QString Site::getName(void)
 {
     return this->siteName;
@@ -56,13 +91,3 @@ QString Site::getAll(void)
     return allInOneString;
 }
 
-inline QDataStream &operator<< (QDataStream &stream, Site &aSite)
-{
-   return stream << aSite.getAll();
-}
-
-// Hur skulle man göra denna funktion om man har gjort medlemsvariablen private. dvs måste sättas via funktioner?
-inline QDataStream &operator>> (QDataStream &stream, Site &aSite)
-{
-   return stream >> aSite.siteName >> aSite.siteIpAddress >> aSite.siteLang >> aSite.sitePin >> aSite.siteDescription;
-}

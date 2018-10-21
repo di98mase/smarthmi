@@ -29,6 +29,8 @@ private slots:
     void assignNewSite(Site newSite);
 
     void on_connectToSiteButton_clicked();
+    void saveListOfSistesToFile();
+    void loadListOfSistesFromFile();
 
 private:
     Ui::MainWindow *ui;
@@ -36,6 +38,8 @@ private:
     Site *mySite;
     ConnectDlg *connectDlg;
     TableModel *sitesTable;
+
+    QList <Site> listOfSites;
 
 };
 

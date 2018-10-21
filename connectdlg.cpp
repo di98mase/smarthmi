@@ -15,6 +15,7 @@ ConnectDlg::~ConnectDlg()
 
 void ConnectDlg::loadListOfSites(Site *aListOfSites)
 {
+    //for (int i=0; i<)
     ui->listSites->insertItem(0, aListOfSites->getName());
 }
 

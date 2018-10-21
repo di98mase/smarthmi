@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QDataStream>
+#include <QTextStream>
 
 
 class Site
@@ -18,6 +19,7 @@ public:
     QString getPin(void);
     QString getLang(void);
     QString getAll(void);
+    //void &operator << ();
 
 //private:
     QString siteName;
@@ -27,5 +29,11 @@ public:
     QString siteDescription;
 
 };
+
+//QDataStream &operator <<(QDataStream &out,const Site &aSite);
+//QDataStream &operator >>(QDataStream &in, Site &aSite);
+
+QTextStream &operator <<(QTextStream &out,const Site &aSite);
+QTextStream &operator >>(QTextStream &in, Site &aSite);
 
 #endif // SITE_H
