@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "site.h"
+#include "tablemodel.h"
 
 namespace Ui {
 class ConnectDlg;
@@ -14,14 +15,17 @@ class ConnectDlg : public QDialog
 
 public:
     explicit ConnectDlg(QWidget *parent = 0);
+    //ConnectDlg(QWidget *parent = 0, TableModel *tableMod = 0);
     ~ConnectDlg();
-    void loadListOfSites(Site *aListOfSites);
-    void purgeTableView(void);
+    void loadListOfSites();
+    //void purgeTableView(void);
+    //void connectTableModel(TableModel *tableMod);
 
 private slots:
     void on_buttonBox_accepted();
 
 private:
+    TableModel *tableModel;
     Ui::ConnectDlg *ui;
 };
 

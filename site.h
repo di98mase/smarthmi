@@ -30,8 +30,8 @@ public:
 
 };
 
-//QDataStream &operator <<(QDataStream &out,const Site &aSite);
-//QDataStream &operator >>(QDataStream &in, Site &aSite);
+QDataStream &operator <<(QDataStream &out,const Site &aSite);
+QDataStream &operator >>(QDataStream &in, Site &aSite);
 
 QTextStream &operator <<(QTextStream &out,const Site &aSite);
 QTextStream &operator >>(QTextStream &in, Site &aSite);

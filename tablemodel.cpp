@@ -5,24 +5,24 @@ TableModel::TableModel(QObject *parent)
    Q_UNUSED(parent);
 }
 
-TableModel::TableModel(QList <Site> sites, QObject *parent)
-    : QAbstractTableModel(parent)
-    , sites(sites)
-{
-
-}
+//TableModel::TableModel(QList <Site> sList, QObject *parent)
+//    : QAbstractTableModel(parent)
+//    //, QList <Site> (sList)
+//{
+//    sitesList = sList;
+//}
 
 int TableModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return sites.size();
+    return sitesList.size();
 }
 
 int TableModel::columnCount(const QModelIndex &parent) const
 {
     // TODO...fixa resten
     Q_UNUSED(parent);
-    return 2;
+    return 5;
 }
 
 QVariant TableModel::data(const QModelIndex &index, int role) const
@@ -31,17 +31,26 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
         return QVariant();
 
-    if (index.row() >= sites.size() || index.row() < 0)
+    if (index.row() >= sitesList.size() || index.row() < 0)
         return QVariant();
 
     if (role == Qt::DisplayRole) {
-        const auto &site = sites.at(index.row());
+        //const auto &site = sitesList.at(index.row());
+        //const Site &s = sitesList.at(index.row());
+        Site * s = new Site();
+        s->setAllParameters("sdf", "sad", "dfs", "esdf", "ahjhe");
 
         if (index.column() == 0)
-            return site.siteName;
-        else if (index.column() == 1)
-            return site.siteIpAddress;
-        // TODO...fixa resten
+            return s->siteName;
+//        else if (index.column() == 1)
+//            return s.siteIpAddress;
+//        else if (index.column() == 2)
+//            return s.siteLang;
+//        else if (index.column() == 3)
+//            return s.sitePin;
+//        else if (index.column() == 4)
+//            return s.siteDescription;
+
     }
     return QVariant();
 
@@ -56,77 +65,81 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation, int ro
         switch (section) {
             case 0:
                 return tr("Site name");
-
             case 1:
                 return tr("Site IP address");
-                // TODO fixa resten
-
-            default:
+            case 2:
+                return tr("Site Language");
+            case 3:
+                return tr("Site Pin");
+            case 4:
+                return tr("Site Description");
+        default:
                 return QVariant();
         }
     }
     return QVariant();
 }
 
-bool TableModel::insertRows(int position, int rows, const QModelIndex &index)
-{
-    Q_UNUSED(index);
+//bool TableModel::insertRows(int position, int rows, const QModelIndex &index)
+//{
+//    Q_UNUSED(index);
 
-    Site aSite;
-    beginInsertRows(QModelIndex(), position, position + rows - 1);
+//    Site aSite;
+//    beginInsertRows(QModelIndex(), position, position + rows - 1);
 
-    for (int row = 0; row < rows; ++row)
-        //sites.insert(position, { QString(), QString() }); vad gör denna funktion?
-        sites.insert(position, aSite);
+//    for (int row = 0; row < rows; ++row)
+//        //sites.insert(position, { QString(), QString() }); vad gör denna funktion?
+//        sites.insert(position, aSite);
 
-    endInsertRows();
-    return true;
-}
+//    endInsertRows();
+//    return true;
+//}
 
-bool TableModel::removeRows(int position, int rows, const QModelIndex &index)
-{
-    Q_UNUSED(index);
-    beginRemoveRows(QModelIndex(), position, position + rows - 1);
+//bool TableModel::removeRows(int position, int rows, const QModelIndex &index)
+//{
+//    Q_UNUSED(index);
+//    beginRemoveRows(QModelIndex(), position, position + rows - 1);
 
-    for (int row = 0; row < rows; ++row)
-        sites.removeAt(position);
+//    for (int row = 0; row < rows; ++row)
+//        sites.removeAt(position);
 
-    endRemoveRows();
-    return true;
-}
+//    endRemoveRows();
+//    return true;
+//}
 
-bool TableModel::setData(const QModelIndex &index, const QVariant &value, int role)
-{
-    if (index.isValid() && role == Qt::EditRole) {
-        int row = index.row();
+//bool TableModel::setData(const QModelIndex &index, const QVariant &value, int role)
+//{
 
-        auto site = sites.value(row);
-        //TODO fixa resten
-        if (index.column() == 0)
-            site.siteName = value.toString();
-        else if (index.column() == 1)
-            site.siteIpAddress = value.toString();
-        else
-            return false;
+//    if (index.isValid() && role == Qt::EditRole) {
+//        int row = index.row();
 
-        sites.replace(row, site);
-        emit(dataChanged(index, index));
+//        auto site = sites.value(row);
+//        //TODO fixa resten
+//        if (index.column() == 0)
+//            site.siteName = value.toString();
+//        else if (index.column() == 1)
+//            site.siteIpAddress = value.toString();
+//        else
+//            return false;
 
-        return true;
-    }
+//        sites.replace(row, site);
+//        emit(dataChanged(index, index));
 
-    return false;
-}
+//        return true;
+//    }
 
-Qt::ItemFlags TableModel::flags(const QModelIndex &index) const
-{
-    if (!index.isValid())
-        return Qt::ItemIsEnabled;
+//    return false;
+//}
 
-    return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
-}
+//Qt::ItemFlags TableModel::flags(const QModelIndex &index) const
+//{
+//    if (!index.isValid())
+//        return Qt::ItemIsEnabled;
 
-QList<Site> TableModel::getSites() const
-{
-    return sites;
-}
+//    return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
+//}
+
+//QList<Site> TableModel::getSites() const
+//{
+//    return sites;
+//}

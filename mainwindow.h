@@ -23,21 +23,19 @@ public:
     ~MainWindow();
 
 private slots:
-//    void on_pushButton_clicked();
     void on_setUpSiteButton_clicked();
-    void addNewSite(QString siteName, QString ipAddress);
     void assignNewSite(Site newSite);
-
     void on_connectToSiteButton_clicked();
     void saveListOfSistesToFile();
+    void saveSiteToFile(Site site);
     void loadListOfSistesFromFile();
 
 private:
     Ui::MainWindow *ui;
     NewSiteDlg *newSiteDlg;
-    Site *mySite;
+    //Site *mySite;
     ConnectDlg *connectDlg;
-    TableModel *sitesTable;
+    //TableModel *tableModel;
 
     QList <Site> listOfSites;
 

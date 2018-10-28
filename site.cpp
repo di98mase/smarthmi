@@ -30,39 +30,44 @@ void Site::setAllParameters(QString sName, QString sIpAddress, QString sLang, QS
     sitePin = sPin;
     siteDescription = sDescription;
 }
-//QDataStream &operator <<(QDataStream &out,const Site &aSite)
-//{
-//   out << aSite.siteName << ","
-//       << aSite.siteIpAddress << ","
-//       << aSite.siteLang <<","
-//       << aSite.sitePin <<","
-//       << aSite.siteDescription << "\n";
-//   return out;
-//}
 
-//QDataStream &operator >>(QDataStream &in, Site &aSite)
-//{
-//autorize = uAutorizingRequest();
-//in >> autorize.UserName >> autorize.Password;
-//return in;
-//}
+QDataStream &operator <<(QDataStream &out,const Site &aSite)
+{
+    out << aSite.siteName << aSite.siteIpAddress << aSite.siteLang << aSite.sitePin << aSite.siteDescription;
+    return out;
+}
+
+QDataStream &operator >>(QDataStream &in, Site &aSite)
+{
+    //QString sName,sIp,sDesc,sLang,sPin;
+
+    in >> aSite.siteName;
+    in >> aSite.siteIpAddress;
+    in >> aSite.siteLang;
+    in >> aSite.sitePin;
+    in >> aSite.siteDescription;
+    //aSite = Site(sName, sIp, sLang, sPin, sDesc);
+    return in;
+}
 
 QTextStream &operator <<(QTextStream &out,const Site &aSite)
 {
-   out << aSite.siteName << ","
-       << aSite.siteIpAddress << ","
-       << aSite.siteLang <<","
-       << aSite.sitePin <<","
-       << aSite.siteDescription << "\n";
-
+   out << aSite.siteName << aSite.siteIpAddress << aSite.siteLang << aSite.sitePin << aSite.siteDescription << endl;
    return out;
 }
 
 QTextStream &operator >>(QTextStream &in, Site &aSite)
 {
-//autorize = uAutorizingRequest();
-//in >> autorize.UserName >> autorize.Password;
-//return in;
+    QString sName;
+    QString sIp;
+    QString sDesc;
+    QString sLang;
+    QString sPin;
+
+    in >> sName << sIp << sLang << sPin << sDesc;
+    aSite = Site(sName, sIp, sLang, sPin, sDesc);
+    return in;
+
 }
 
 QString Site::getName(void)
