@@ -5,17 +5,17 @@ TableModel::TableModel(QObject *parent)
    Q_UNUSED(parent);
 }
 
-//TableModel::TableModel(QList <Site> sList, QObject *parent)
-//    : QAbstractTableModel(parent)
-//    //, QList <Site> (sList)
-//{
-//    sitesList = sList;
-//}
+TableModel::TableModel(QObject *parent, QList <Site> *sListPtr)
+    : QAbstractTableModel(parent)
+    //, QList <Site> (sList)
+{
+    siteListPtr = sListPtr;
+}
 
 int TableModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return sitesList.size();
+    return siteListPtr->size();
 }
 
 int TableModel::columnCount(const QModelIndex &parent) const
@@ -31,17 +31,17 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
         return QVariant();
 
-    if (index.row() >= sitesList.size() || index.row() < 0)
+    if (index.row() >= siteListPtr->size() || index.row() < 0)
         return QVariant();
 
     if (role == Qt::DisplayRole) {
         //const auto &site = sitesList.at(index.row());
         //const Site &s = sitesList.at(index.row());
-        Site * s = new Site();
-        s->setAllParameters("sdf", "sad", "dfs", "esdf", "ahjhe");
+//        Site * s = new Site();
+//        s->setAllParameters("sdf", "sad", "dfs", "esdf", "ahjhe");
 
         if (index.column() == 0)
-            return s->siteName;
+            return siteListPtr->at(0).siteName;
 //        else if (index.column() == 1)
 //            return s.siteIpAddress;
 //        else if (index.column() == 2)

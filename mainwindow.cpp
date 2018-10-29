@@ -17,37 +17,22 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // The list that will store all configured sites.
-    QList <Site> listOfSites;
+    // själva pekaren borde vara const.
+    QList <Site> *listOfSites = new QList <Site>;
 
     // load it from file
-    loadListOfSistesFromFile();
+    loadListOfSistesFromFile(listOfSites, thePersistantFile);
 
 
     // setup the new Site Dialog
     newSiteDlg = new NewSiteDlg(this);
     newSiteDlg->setModal(true);
-    connectDlg = new ConnectDlg(this);
+    connectDlg = new ConnectDlg(this, listOfSites);
     connectDlg->setModal(true);
 
 
     // connect signals and slots
     connect(newSiteDlg, &NewSiteDlg::sendNewSiteProperties, this, &MainWindow::assignNewSite);
-
-
-
-
-
-
-//    tableModelSites = new TableModel(listOfSites, this);
-//    tableModelSites->headerData(0, Qt::Horizontal, Qt::DisplayRole);
-//    tableModelSites->headerData(1, Qt::Horizontal, Qt::DisplayRole);
-//    tableModelSites->headerData(2, Qt::Horizontal, Qt::DisplayRole);
-//    tableModelSites->headerData(3, Qt::Horizontal, Qt::DisplayRole);
-//    tableModelSites->headerData(4, Qt::Horizontal, Qt::DisplayRole);
-
-
-    //connectDlg->loadListOfSites();
-    //connectDlg->connectTableModel(tableModelSites);
 
 }
 
@@ -56,14 +41,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::loadListOfSistesFromFile()
+void MainWindow::loadListOfSistesFromFile(QList <Site> *listOfSitesPtr, QString fName)
 {
-    listOfSites.clear();
+    listOfSitesPtr->clear();
 
     qDebug() <<"loadListOfSistesFromFile\n";
 
-    QString filename = "sites.dat";
-    QFile file(filename);
+    QFile file(fName);
 
     if (file.open(QIODevice::ReadOnly))
     {
@@ -71,7 +55,7 @@ void MainWindow::loadListOfSistesFromFile()
         /* Read from file*/
         QDataStream stream(&file);
 
-        stream >> listOfSites;
+        stream >> (*listOfSitesPtr);  // blir detta rätt?
 
         file.close();
         qDebug() <<"file closed\n";
@@ -86,13 +70,12 @@ void MainWindow::loadListOfSistesFromFile()
 
 }
 
-void MainWindow::saveListOfSistesToFile()
+void MainWindow::saveListOfSistesToFile(QString fName)
 {
 
     qDebug() <<"saveListOfSistesToFile\n";
 
-    QString filename = "sites.dat";
-    QFile file(filename);
+    QFile file(fName);
 
     if (file.open(QIODevice::Append))
     {
@@ -111,13 +94,12 @@ void MainWindow::saveListOfSistesToFile()
 
 }
 
-void MainWindow::saveSiteToFile(Site site)
+void MainWindow::saveSiteToFile(Site site, QString fName)
 {
 
     qDebug() <<"saveSiteToFile\n";
 
-    QString filename = "sites.dat";
-    QFile file(filename);
+    QFile file(fName);
 
     if (file.open(QIODevice::Append))
     {
@@ -138,9 +120,9 @@ void MainWindow::assignNewSite(Site newSite)
 {
 
     // save the new site to file
-    listOfSites.append(newSite);
-    saveSiteToFile(newSite);
-    //saveListOfSistesToFile();
+    listOfSites->append(newSite);
+    saveSiteToFile(newSite,thePersistantFile);
+
 
     ui->connectToSiteButton->setEnabled(true);
 }
@@ -161,9 +143,6 @@ void MainWindow::on_setUpSiteButton_clicked()
 
 void MainWindow::on_connectToSiteButton_clicked()
 {
-
-    //connectDlg->purgeTableView();
-   // connectDlg->loadListOfSites();
 
     if(connectDlg->exec())
     {
