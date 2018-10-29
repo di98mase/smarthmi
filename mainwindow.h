@@ -26,18 +26,17 @@ private slots:
     void on_setUpSiteButton_clicked();
     void assignNewSite(Site newSite);
     void on_connectToSiteButton_clicked();
-    void saveListOfSistesToFile();
-    void saveSiteToFile(Site site);
-    void loadListOfSistesFromFile();
+    void saveListOfSistesToFile(QString fName);
+    void saveSiteToFile(Site site, QString fName);
+    void loadListOfSistesFromFile(QList <Site> *listOfSitesPtr, QString fName);
 
 private:
     Ui::MainWindow *ui;
     NewSiteDlg *newSiteDlg;
-    //Site *mySite;
     ConnectDlg *connectDlg;
-    //TableModel *tableModel;
 
-    QList <Site> listOfSites;
+    QList <Site> *listOfSites;
+    QString thePersistantFile = "sites.dat";
 
 };
 

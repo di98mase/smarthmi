@@ -16,7 +16,7 @@ class TableModel : public QAbstractTableModel
 
 public:
     TableModel(QObject *parent=0);
-    TableModel(QList <Site> sList, QObject *parent=0);
+    TableModel(QObject *parent=0, QList <Site> *sListPtr=0);
 
     int rowCount(const QModelIndex &parent) const override;
     int columnCount(const QModelIndex &parent) const override;
@@ -30,7 +30,7 @@ public:
 //    QList<Site> getSites() const;
 
 private:
-    QList<Site> sitesList;
+    QList <Site> *siteListPtr;
 
 };
 

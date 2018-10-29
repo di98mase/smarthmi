@@ -14,15 +14,11 @@ class ConnectDlg : public QDialog
     Q_OBJECT
 
 public:
-    explicit ConnectDlg(QWidget *parent = 0);
-    //ConnectDlg(QWidget *parent = 0, TableModel *tableMod = 0);
+    explicit ConnectDlg(QWidget *parent = 0, QList <Site> *listOfSites=0);
     ~ConnectDlg();
-    void loadListOfSites();
-    //void purgeTableView(void);
-    //void connectTableModel(TableModel *tableMod);
 
 private slots:
-    void on_buttonBox_accepted();
+    //void on_buttonBox_accepted();
 
 private:
     TableModel *tableModel;
