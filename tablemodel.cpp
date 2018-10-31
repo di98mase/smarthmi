@@ -3,19 +3,27 @@
 TableModel::TableModel(QObject *parent)
 {
    Q_UNUSED(parent);
-}
 
-TableModel::TableModel(QObject *parent, QList <Site> *sListPtr)
-    : QAbstractTableModel(parent)
-    //, QList <Site> (sList)
-{
-    siteListPtr = sListPtr;
+    // The list that will store all configured sites.
+
+
+    Site aSite;
+    aSite.setAllParameters("Hej","Hej","Hej","Hej","Hej");
+    //djup kopiering eller måste man göra en new Site?
+    for (int i=0; i<50; i++)
+    {
+        listOfSites.insert(i, aSite);
+    }
+    //loadSistesFromFile();
+
+
+
 }
 
 int TableModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return siteListPtr->size();
+    return listOfSites.size();
 }
 
 int TableModel::columnCount(const QModelIndex &parent) const
@@ -31,25 +39,23 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
         return QVariant();
 
-    if (index.row() >= siteListPtr->size() || index.row() < 0)
+    if (index.row() >= listOfSites.size() || index.row() < 0)
         return QVariant();
 
     if (role == Qt::DisplayRole) {
-        //const auto &site = sitesList.at(index.row());
-        //const Site &s = sitesList.at(index.row());
-//        Site * s = new Site();
-//        s->setAllParameters("sdf", "sad", "dfs", "esdf", "ahjhe");
+
+            int row = index.row();
 
         if (index.column() == 0)
-            return siteListPtr->at(0).siteName;
-//        else if (index.column() == 1)
-//            return s.siteIpAddress;
-//        else if (index.column() == 2)
-//            return s.siteLang;
-//        else if (index.column() == 3)
-//            return s.sitePin;
-//        else if (index.column() == 4)
-//            return s.siteDescription;
+            return listOfSites.at(row).siteName;
+        else if (index.column() == 1)
+            return listOfSites.at(row).siteIpAddress;
+        else if (index.column() == 2)
+            return listOfSites.at(row).siteLang;
+        else if (index.column() == 3)
+            return listOfSites.at(row).sitePin;
+        else if (index.column() == 4)
+            return listOfSites.at(row).siteDescription;
 
     }
     return QVariant();
@@ -79,6 +85,31 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation, int ro
     }
     return QVariant();
 }
+
+//void TableModel::loadSistesFromFile()
+//{
+//    listOfSites.clear();
+
+//    qDebug() <<"loadListOfSistesFromFile\n";
+
+//    QFile file(fName);
+
+//    if (file.open(QIODevice::ReadOnly))
+//    {
+
+//        /* Read and load Sites from file */
+//        QDataStream stream(&file);
+//        stream >> listOfSites;
+
+//        file.close();
+//        qDebug() <<"file closed\n";
+//    }
+//    else
+//    {
+//        // TODO add Messagebox
+//        qDebug() <<"Failed to load sites from file\n";
+//    }
+
 
 //bool TableModel::insertRows(int position, int rows, const QModelIndex &index)
 //{

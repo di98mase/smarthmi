@@ -28,6 +28,6 @@ void NewSiteDlg::on_btnBox_accepted()
 
     Site aSite(sName,sIp,sPin,sLang,sDesc);
 
-    emit sendNewSiteProperties(aSite);
+    emit newSiteConfigured(aSite);
 
 }

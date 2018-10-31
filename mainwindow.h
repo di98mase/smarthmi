@@ -19,24 +19,29 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
     void on_setUpSiteButton_clicked();
     void assignNewSite(Site newSite);
     void on_connectToSiteButton_clicked();
-    void saveListOfSistesToFile(QString fName);
-    void saveSiteToFile(Site site, QString fName);
-    void loadListOfSistesFromFile(QList <Site> *listOfSitesPtr, QString fName);
+    void saveSistesToFile();
+//    void saveSiteToFile(Site site, QString fName);
+    void loadSistesFromFile();
+
+signals:
+      void newSiteConfigured(Site newSite);
 
 private:
     Ui::MainWindow *ui;
     NewSiteDlg *newSiteDlg;
     ConnectDlg *connectDlg;
 
-    QList <Site> *listOfSites;
+    //QList <Site> *listOfSites;
+    bool newSitesAdded;
     QString thePersistantFile = "sites.dat";
+    QList <Site> listOfSites;
 
 };
 

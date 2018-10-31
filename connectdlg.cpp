@@ -1,20 +1,28 @@
 #include "connectdlg.h"
 #include "ui_connectdlg.h"
 
-ConnectDlg::ConnectDlg(QWidget *parent, QList <Site> *listOfSites) :
+ConnectDlg::ConnectDlg(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ConnectDlg)
 {
     ui->setupUi(this);
 
-    tableModel = new TableModel(this, listOfSites);
-    ui->tableView->setModel(tableModel);
+    dataModelPtr = new TableModel(this);
+    ui->tableView->setModel(dataModelPtr);
+
+
+//    connect(this, &MainWindow::newSiteConfigured, connectDlg, ConnectDlg::assignNewSite);
 
 }
 
 ConnectDlg::~ConnectDlg()
 {
     delete ui;
+}
+
+void ConnectDlg::assignNewSite(Site newSite)
+{
+    ;
 }
 
 

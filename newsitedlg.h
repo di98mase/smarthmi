@@ -24,8 +24,8 @@ private slots:
     void on_btnBox_accepted();
 
 signals:
-      void sendNewSiteDetails(QString name, QString address);
-      void sendNewSiteProperties(Site newSite);
+
+      void newSiteConfigured(Site newSite);
 
 private:
     Ui::NewSiteDlg *ui;

@@ -6,7 +6,6 @@
 #include <QVariant>
 #include <QModelIndex>
 
-
 #include "site.h"
 
 class TableModel : public QAbstractTableModel
@@ -15,13 +14,15 @@ class TableModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    TableModel(QObject *parent=0);
-    TableModel(QObject *parent=0, QList <Site> *sListPtr=0);
+    TableModel(QObject *parent);
+
 
     int rowCount(const QModelIndex &parent) const override;
     int columnCount(const QModelIndex &parent) const override;
     QVariant data(const QModelIndex &index, int role) const override;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+
+    //void loadSistesFromFile();
 
 //    bool insertRows(int position, int rows, const QModelIndex &index) override;
 //    bool removeRows(int position, int rows, const QModelIndex &index) override;
@@ -30,7 +31,9 @@ public:
 //    QList<Site> getSites() const;
 
 private:
-    QList <Site> *siteListPtr;
+
+    QList <Site> listOfSites;
+//    QString fName="sites.dat";
 
 };
 
