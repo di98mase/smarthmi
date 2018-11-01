@@ -33,6 +33,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // connect signals and slots
     connect(newSiteDlg, &NewSiteDlg::newSiteConfigured, this, &MainWindow::assignNewSite);
+    //
+    connect(newSiteDlg, &NewSiteDlg::newSiteConfigured, this, &MainWindow::assignNewSite);
+
 
 }
 
@@ -66,7 +69,6 @@ void MainWindow::loadSistesFromFile()
         // TODO add Messagebox
         qDebug() <<"Failed to load sites from file\n";
     }
-
 }
 
 void MainWindow::saveSistesToFile()
@@ -74,11 +76,11 @@ void MainWindow::saveSistesToFile()
     qDebug() <<"saveListOfSistesToFile";
     QFile file(thePersistantFile);
 
-    if (file.open(QIODevice::Append))
+    if (file.open(QIODevice::WriteOnly))
     {
-        QDataStream stream(&file);
-        //push the entire list in one go...
         qDebug() <<"Items in listOfSites: " << listOfSites.size();
+
+        QDataStream stream(&file);
         stream << listOfSites;
         file.close();
         qDebug() <<"file closed\n";

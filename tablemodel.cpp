@@ -3,20 +3,12 @@
 TableModel::TableModel(QObject *parent)
 {
    Q_UNUSED(parent);
-
-    Site aSite;
-    aSite.setAllParameters("Hej","Hej","Hej","Hej","Hej");
-    for (int i=0; i<50; i++)
-    {
-        listOfSites.insert(i, aSite);
-    }
 }
 
 TableModel::TableModel(QObject *parent, QList <Site> listSites) :
     listOfSites(listSites)
 {
    Q_UNUSED(parent);
-   //listOfSites = listSites;
 }
 
 
