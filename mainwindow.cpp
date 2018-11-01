@@ -21,10 +21,14 @@ MainWindow::MainWindow(QWidget *parent) :
     // setup the new Site Dialog
     newSiteDlg = new NewSiteDlg(this);
     newSiteDlg->setModal(true);
-    connectDlg = new ConnectDlg(this);
-    connectDlg->setModal(true);
 
     loadSistesFromFile();
+
+
+    //connectDlg = new ConnectDlg(this);
+
+    connectDlg = new ConnectDlg(this, listOfSites);
+    connectDlg->setModal(true);
 
     // connect signals and slots
     connect(newSiteDlg, &NewSiteDlg::newSiteConfigured, this, &MainWindow::assignNewSite);
@@ -53,6 +57,7 @@ void MainWindow::loadSistesFromFile()
         stream >> listOfSites;
         file.close();
         qDebug() <<"file closed\n";
+        qDebug() <<"Items in listOfSites: " << listOfSites.size();
         ui->connectToSiteButton->setEnabled(true);
     }
     else

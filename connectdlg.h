@@ -15,6 +15,7 @@ class ConnectDlg : public QDialog
 
 public:
     explicit ConnectDlg(QWidget *parent = nullptr);
+    ConnectDlg(QWidget *parent, QList <Site> listOfSites);
     ~ConnectDlg();
 
 private slots:

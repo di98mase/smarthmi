@@ -15,6 +15,7 @@ class TableModel : public QAbstractTableModel
 
 public:
     TableModel(QObject *parent);
+    TableModel(QObject *parent, QList <Site> listSites);
 
 
     int rowCount(const QModelIndex &parent) const override;

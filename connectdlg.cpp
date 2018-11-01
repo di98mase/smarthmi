@@ -6,14 +6,21 @@ ConnectDlg::ConnectDlg(QWidget *parent) :
     ui(new Ui::ConnectDlg)
 {
     ui->setupUi(this);
-
     dataModelPtr = new TableModel(this);
     ui->tableView->setModel(dataModelPtr);
-
-
-//    connect(this, &MainWindow::newSiteConfigured, connectDlg, ConnectDlg::assignNewSite);
-
 }
+
+ConnectDlg::ConnectDlg(QWidget *parent, QList <Site> listOfSites) :
+    QDialog(parent),
+    ui(new Ui::ConnectDlg),
+    dataModelPtr(new TableModel(nullptr))
+{
+    ui->setupUi(this);
+
+    dataModelPtr = new TableModel(this, listOfSites);
+    ui->tableView->setModel(dataModelPtr);
+}
+
 
 ConnectDlg::~ConnectDlg()
 {

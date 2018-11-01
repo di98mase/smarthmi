@@ -4,21 +4,21 @@ TableModel::TableModel(QObject *parent)
 {
    Q_UNUSED(parent);
 
-    // The list that will store all configured sites.
-
-
     Site aSite;
     aSite.setAllParameters("Hej","Hej","Hej","Hej","Hej");
-    //djup kopiering eller måste man göra en new Site?
     for (int i=0; i<50; i++)
     {
         listOfSites.insert(i, aSite);
     }
-    //loadSistesFromFile();
-
-
-
 }
+
+TableModel::TableModel(QObject *parent, QList <Site> listSites) :
+    listOfSites(listSites)
+{
+   Q_UNUSED(parent);
+   //listOfSites = listSites;
+}
+
 
 int TableModel::rowCount(const QModelIndex &parent) const
 {
