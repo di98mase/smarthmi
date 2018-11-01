@@ -19,7 +19,8 @@ public:
     QString getPin(void);
     QString getLang(void);
     QString getAll(void);
-    //void &operator << ();
+
+    bool operator== (const Site &s);
 
 //private:
     QString siteName;
@@ -35,5 +36,6 @@ QDataStream &operator >>(QDataStream &in, Site &aSite);
 
 QTextStream &operator <<(QTextStream &out,const Site &aSite);
 QTextStream &operator >>(QTextStream &in, Site &aSite);
+
 
 #endif // SITE_H

@@ -3,24 +3,32 @@
 
 ConnectDlg::ConnectDlg(QWidget *parent) :
     QDialog(parent),
+    tblModPtr(new TableModel(parent)),
     ui(new Ui::ConnectDlg)
 {
     ui->setupUi(this);
-    dataModelPtr = new TableModel(this);
-    ui->tableView->setModel(dataModelPtr);
+    ui->tableView->setModel(tblModPtr);
 }
 
 ConnectDlg::ConnectDlg(QWidget *parent, QList <Site> listOfSites) :
     QDialog(parent),
-    ui(new Ui::ConnectDlg),
-    dataModelPtr(new TableModel(nullptr))
+    tblModPtr(new TableModel(parent)),
+    ui(new Ui::ConnectDlg)
 {
     ui->setupUi(this);
 
-    dataModelPtr = new TableModel(this, listOfSites);
-    ui->tableView->setModel(dataModelPtr);
+    tblModPtr = new TableModel(this, listOfSites);
+    ui->tableView->setModel(tblModPtr);
 }
 
+ConnectDlg::ConnectDlg(QWidget *parent, TableModel *tblModel) :
+    QDialog(parent),
+    tblModPtr(tblModel),
+    ui(new Ui::ConnectDlg)
+{
+    ui->setupUi(this);
+    ui->tableView->setModel(tblModel);
+}
 
 ConnectDlg::~ConnectDlg()
 {

@@ -38,10 +38,10 @@ private:
     NewSiteDlg *newSiteDlg;
     ConnectDlg *connectDlg;
 
-    //QList <Site> *listOfSites;
     bool newSitesAdded;
     QString thePersistantFile = "sites.dat";
     QList <Site> listOfSites;
+    TableModel *tableModel;
 
 };
 

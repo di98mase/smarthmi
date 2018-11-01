@@ -96,3 +96,16 @@ QString Site::getAll(void)
     return allInOneString;
 }
 
+bool Site::operator== (const Site &s)
+{
+  bool areEqual=false;
+  if ( siteDescription == s.siteDescription &&
+       siteIpAddress == s.siteIpAddress &&
+       sitePin == s.sitePin &&
+       siteLang == s.siteLang &&
+       siteDescription == s.siteDescription)
+  {
+      areEqual = true;
+  }
+  return areEqual;
+}

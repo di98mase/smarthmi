@@ -24,11 +24,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     loadSistesFromFile();
 
+    tableModel = new TableModel(this, listOfSites);
 
-    //connectDlg = new ConnectDlg(this);
-
-    connectDlg = new ConnectDlg(this, listOfSites);
+    connectDlg = new ConnectDlg(this, tableModel);
     connectDlg->setModal(true);
+
+
 
     // connect signals and slots
     connect(newSiteDlg, &NewSiteDlg::newSiteConfigured, this, &MainWindow::assignNewSite);
@@ -47,7 +48,7 @@ MainWindow::~MainWindow()
 void MainWindow::loadSistesFromFile()
 {
     listOfSites.clear();
-    qDebug() << "loadListOfSistesFromFile\n";
+    qDebug() << "loadListOfSistesFromFile";
     QFile file(thePersistantFile);
 
     if (file.open(QIODevice::ReadOnly))
@@ -56,7 +57,7 @@ void MainWindow::loadSistesFromFile()
         QDataStream stream(&file);
         stream >> listOfSites;
         file.close();
-        qDebug() <<"file closed\n";
+        qDebug() <<"file closed";
         qDebug() <<"Items in listOfSites: " << listOfSites.size();
         ui->connectToSiteButton->setEnabled(true);
     }
@@ -70,13 +71,14 @@ void MainWindow::loadSistesFromFile()
 
 void MainWindow::saveSistesToFile()
 {
-    qDebug() <<"saveListOfSistesToFile\n";
+    qDebug() <<"saveListOfSistesToFile";
     QFile file(thePersistantFile);
 
     if (file.open(QIODevice::Append))
     {
         QDataStream stream(&file);
         //push the entire list in one go...
+        qDebug() <<"Items in listOfSites: " << listOfSites.size();
         stream << listOfSites;
         file.close();
         qDebug() <<"file closed\n";
@@ -113,9 +115,15 @@ void MainWindow::saveSistesToFile()
 
 void MainWindow::assignNewSite(Site newSite)
 {
-    listOfSites.append(newSite);
-    newSitesAdded = true;
-    ui->connectToSiteButton->setEnabled(true);
+    // Check if this site is a duplicate
+    if (!listOfSites.contains(newSite))
+    {
+        listOfSites.append(newSite);
+        newSitesAdded = true;
+        ui->connectToSiteButton->setEnabled(true);
+    }
+    else
+       qDebug() <<"Site already stored!";
 }
 
 void MainWindow::on_setUpSiteButton_clicked()
