@@ -34,7 +34,6 @@ public:
 private:
 
     QList <Site> listOfSites;
-//    QString fName="sites.dat";
 
 };
 
